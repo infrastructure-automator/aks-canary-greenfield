@@ -1,0 +1,21 @@
+controller:
+  service:
+    loadBalancerIP: "${nginx_ingress_ip}"
+    annotations:
+      service.beta.kubernetes.io/azure-load-balancer-resource-group: "${aks_resource_group_name}"
+      service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthprobe/"
+
+  replicaCount: "${nginx_replica_count}"
+
+  allowSnippetAnnotations: true
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+
+rbac:
+  create: true
